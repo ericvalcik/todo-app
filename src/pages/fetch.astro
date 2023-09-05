@@ -1,14 +1,14 @@
 ---
 import { InsertUser, users } from "../db/schema";
 import { drizzle } from 'drizzle-orm/libsql';
-import {createClient} from "@libsql/client";
+import { createClient } from "@libsql/client";
 
 const client = createClient({ url: import.meta.env.DATABASE_URL, authToken: import.meta.env.DATABASE_AUTH_TOKEN });
 const db = drizzle(client);
-const insertUser = (user: InsertUser) => {
-  return db.insert(users).values(user).run()
+const insertUser = async (user: InsertUser) => {
+  return await db.insert(users).values(user).execute();
 }
 
-insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
+await insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
 ---
 {"inserted user :)"}
