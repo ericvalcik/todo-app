@@ -12,6 +12,13 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",
     "astro": "^3.0.8",
+    "better-sqlite3": "^8.6.0",
+    "drizzle-orm": "^0.28.5",
     "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.4",
+    "drizzle-kit": "^0.19.13",
+    "prettier": "^3.0.3"
   }
 }

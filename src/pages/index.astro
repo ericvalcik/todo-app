@@ -1,6 +1,15 @@
 ---
-const text = "balls";
-console.log(text)
----
+import { drizzle, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
+import Database from 'better-sqlite3';
+import { InsertUser, User, users } from "../db/schema";
 
-{text}
+const sqlite = new Database(import.meta.env.DATABASE_URL);
+const db: BetterSQLite3Database<{}> = drizzle(sqlite);
+
+const result: User[] = db.select().from(users).all();
+
+const insertUser = (user: InsertUser) => {
+  return db.insert(users).values(user).run()
+}
+---
+{result}
