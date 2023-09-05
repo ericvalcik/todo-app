@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate": "drizzle-kit generate:sqlite"
+    "generate": "drizzle-kit generate:sqlite",
+    "push": "drizzle-kit push:sqlite --driver better-sqlite --schema ./src/db/schema.ts --url sqlite.db"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",

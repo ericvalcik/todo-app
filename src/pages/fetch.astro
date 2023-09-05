@@ -1,15 +1,14 @@
 ---
+import { InsertUser, users } from "../db/schema";
 import { drizzle, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import Database from 'better-sqlite3';
-import { InsertUser, User, users } from "../db/schema";
 
-const sqlite = new Database(import.meta.env.DATABASE_URL);
+const sqlite = new Database('sqlite.db');
 const db: BetterSQLite3Database<{}> = drizzle(sqlite);
-
-const result: User[] = db.select().from(users).all();
-
 const insertUser = (user: InsertUser) => {
   return db.insert(users).values(user).run()
 }
+
+insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
 ---
-{JSON.stringify(result)}
+{"inserted user :)"}
