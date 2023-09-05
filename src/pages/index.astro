@@ -1,15 +1,11 @@
 ---
-import { drizzle, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
-import Database from 'better-sqlite3';
-import { InsertUser, User, users } from "../db/schema";
+import { User, users } from "../db/schema";
+import { drizzle } from 'drizzle-orm/libsql';
+import {createClient} from "@libsql/client";
 
-const sqlite = new Database(import.meta.env.DATABASE_URL);
-const db: BetterSQLite3Database<{}> = drizzle(sqlite);
+const client = createClient({ url: import.meta.env.DATABASE_URL, authToken: import.meta.env.DATABASE_AUTH_TOKEN });
+const db = drizzle(client);
 
-const result: User[] = db.select().from(users).all();
-
-const insertUser = (user: InsertUser) => {
-  return db.insert(users).values(user).run()
-}
+const result: User[] = await db.select().from(users).all();
 ---
 {JSON.stringify(result)}
