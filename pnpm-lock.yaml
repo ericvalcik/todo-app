@@ -16,15 +16,12 @@ dependencies:
     version: 3.0.8
   drizzle-orm:
     specifier: ^0.28.5
-    version: 0.28.5(@libsql/client@0.3.2)(@types/better-sqlite3@7.6.4)
+    version: 0.28.5(@libsql/client@0.3.2)
   tailwindcss:
     specifier: ^3.0.24
     version: 3.3.3
 
 devDependencies:
-  '@types/better-sqlite3':
-    specifier: ^7.6.4
-    version: 7.6.4
   drizzle-kit:
     specifier: ^0.19.13
     version: 0.19.13
@@ -858,11 +855,6 @@ packages:
       '@babel/types': 7.22.15
     dev: false
 
-  /@types/better-sqlite3@7.6.4:
-    resolution: {integrity: sha512-dzrRZCYPXIXfSR1/surNbJ/grU3scTaygS0OMzjlGf71i9sc2fGyHPXXiXmEvNIoE0cGwsanEFMVJxPXmco9Eg==}
-    dependencies:
-      '@types/node': 20.5.9
-
   /@types/debug@4.1.8:
     resolution: {integrity: sha512-/vPO1EPOs306Cvhwv7KfVfYvOJqA/S/AXjaHQiJboCZzcNDb+TIJFN9/2C9DZ//ijSKWioNyUxD792QmDJ+HKQ==}
     dependencies:
@@ -908,6 +900,7 @@ packages:
 
   /@types/node@20.5.9:
     resolution: {integrity: sha512-PcGNd//40kHAS3sTlzKB9C9XL4K0sTup8nbG5lC14kzEteTNuAFh9u5nA0o5TWnSG2r/JNPRXFVcHJIIeRlmqQ==}
+    dev: false
 
   /@types/parse5@6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
@@ -1496,7 +1489,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.28.5(@libsql/client@0.3.2)(@types/better-sqlite3@7.6.4):
+  /drizzle-orm@0.28.5(@libsql/client@0.3.2):
     resolution: {integrity: sha512-6r6Iw4c38NAmW6TiKH3TUpGUQ1YdlEoLJOQptn8XPx3Z63+vFNKfAiANqrIiYZiMjKR9+NYAL219nFrmo1duXA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -1559,7 +1552,6 @@ packages:
         optional: true
     dependencies:
       '@libsql/client': 0.3.2
-      '@types/better-sqlite3': 7.6.4
     dev: false
 
   /dset@3.1.2:
