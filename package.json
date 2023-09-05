@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/vercel": "^4.0.3",
     "@libsql/client": "^0.3.2",
     "astro": "^3.0.8",
     "drizzle-orm": "^0.28.5",
