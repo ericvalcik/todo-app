@@ -7,5 +7,11 @@ const client = createClient({ url: import.meta.env.DATABASE_URL, authToken: impo
 const db = drizzle(client);
 
 const result: User[] = await db.select().from(users).all();
+const currentTime = new Date().toLocaleString();
 ---
-{JSON.stringify(result)}
+<div>
+  {JSON.stringify(result)}
+</div>
+<div>
+  current time: {currentTime}
+</div>
