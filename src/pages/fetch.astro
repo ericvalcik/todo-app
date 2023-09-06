@@ -18,11 +18,15 @@ const insertUser = async (user: InsertUser) => {
 
 <Layout title="Add new user">
   <h1>Add a new user</h1>
-  <form hx-post="/add-user" class="flex flex-col gap-2">
+  <form hx-post="/add-user" class="flex flex-col max-w-md py-6">
     <label for="fullName">Full name</label>
     <input type="text" id="fullName" name="fullName" />
     <label for="phone">Phone</label>
     <input type="text" id="phone" name="phone" />
-    <button type="submit">Add</button>
+    <button
+      type="submit"
+      class="rounded-md bg-black text-white px-3 py-0.5 w-fit mt-3"
+      >Add
+    </button>
   </form>
 </Layout>
