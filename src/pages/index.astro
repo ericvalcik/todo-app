@@ -1,17 +1,32 @@
 ---
 import { User, users } from "../db/schema";
-import { drizzle } from 'drizzle-orm/libsql';
-import {createClient} from "@libsql/client";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
+import Layout from "../layouts/Layout.astro";
 
-const client = createClient({ url: import.meta.env.DATABASE_URL, authToken: import.meta.env.DATABASE_AUTH_TOKEN });
+const client = createClient({
+  url: import.meta.env.DATABASE_URL,
+  authToken: import.meta.env.DATABASE_AUTH_TOKEN,
+});
 const db = drizzle(client);
 
 const result: User[] = await db.select().from(users).all();
 const currentTime = new Date().toLocaleString();
 ---
-<div>
-  {JSON.stringify(result)}
-</div>
-<div>
-  current time: {currentTime}
-</div>
+
+<Layout title="Home">
+  <div class="flex flex-col gap-4 py-8">
+    {
+      result.map((user) => (
+        <div class="flex gap-4 rounded-lg border border-solid border-black p-4">
+          <div>{user.id}</div>
+          <div>{user.fullName}</div>
+          <div>{user.phone}</div>
+        </div>
+      ))
+    }
+  </div>
+  <div>
+    current time: {currentTime}
+  </div>
+</Layout>

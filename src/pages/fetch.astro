@@ -1,14 +1,28 @@
 ---
 import { InsertUser, users } from "../db/schema";
-import { drizzle } from 'drizzle-orm/libsql';
+import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
+import Layout from "../layouts/Layout.astro";
 
-const client = createClient({ url: import.meta.env.DATABASE_URL, authToken: import.meta.env.DATABASE_AUTH_TOKEN });
+const client = createClient({
+  url: import.meta.env.DATABASE_URL,
+  authToken: import.meta.env.DATABASE_AUTH_TOKEN,
+});
 const db = drizzle(client);
 const insertUser = async (user: InsertUser) => {
   return await db.insert(users).values(user).execute();
-}
+};
 
-await insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
+// await insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
 ---
-{"inserted user :)"}
+
+<Layout title="Add new user">
+  <h1>Add a new user</h1>
+  <form hx-post="/add-user" class="flex flex-col gap-2">
+    <label for="fullName">Full name</label>
+    <input type="text" id="fullName" name="fullName" />
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" />
+    <button type="submit">Add</button>
+  </form>
+</Layout>
