@@ -17,7 +17,7 @@ if (Astro.cookies.has("session")) {
 <Layout title="Sign in">
   <h1>Sign in</h1>
   <p>New here? <a href="/register">Create an account</a></p>
-  <form action="/api/auth/signin" method="post">
+  <form action="/api/auth/signin-api" method="post">
     <label for="email" for="email">Email</label>
     <input type="email" name="email" id="email" />
     <label for="password">Password</label>
@@ -53,7 +53,7 @@ if (Astro.cookies.has("session")) {
       password,
     );
     const idToken = await userCredential.user.getIdToken();
-    const response = await fetch("/api/auth/signin", {
+    const response = await fetch("/api/auth/signin-api", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${idToken}`,
