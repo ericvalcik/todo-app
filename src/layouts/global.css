@@ -15,11 +15,15 @@ label {
 }
 
 input {
-    @apply border border-gray-300 rounded-md shadow-sm mb-2;
+    @apply border border-gray-300 rounded-md shadow-sm mb-2 px-1;
 }
 
 button, [type="submit"] {
     @apply rounded-md shadow-sm bg-black text-white px-3 py-[1px] hover:bg-gray-900;
+}
+
+button[disabled] {
+    @apply bg-gray-600 text-gray-300 hover:bg-gray-600;
 }
 
 a {

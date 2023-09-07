@@ -32,7 +32,7 @@ const result: User[] = await db.select().from(users).all();
 const currentTime = new Date().toLocaleString();
 ---
 
-<Layout title="Home">
+<Layout title="Home" page="home">
   <div class="flex flex-col gap-4 py-8">
     {
       result.map((user) => (

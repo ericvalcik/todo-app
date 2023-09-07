@@ -34,7 +34,7 @@ const insertUser = async (user: InsertUser) => {
 // await insertUser({ fullName: "Pavel Flekac", phone: "123456789" })
 ---
 
-<Layout title="Add new user">
+<Layout title="Add new user" page="fetch">
   <h1>Add a new user</h1>
   <form hx-post="/add-user" class="flex flex-col max-w-md py-6">
     <label for="fullName">Full name</label>

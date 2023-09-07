@@ -2,6 +2,7 @@
 import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from "../layouts/Layout.astro";
+import Spinner from "../components/Spinner.astro";
 
 /* Check if the user is authenticated */
 const auth = getAuth(app);
@@ -14,9 +15,9 @@ if (Astro.cookies.has("session")) {
 }
 ---
 
-<Layout title="Sign in">
+<Layout title="Sign in" page="sign-in">
   <div class="grow flex items-center">
-    <div class="mx-auto max-w-[400px]">
+    <div class="mx-auto w-[260px] pb-40">
       <h1>Sign in</h1>
       <p>New here? <a href="/register">Create an account</a></p>
       <form action="/api/auth/signin-api" method="post" class="flex flex-col">
@@ -24,7 +25,14 @@ if (Astro.cookies.has("session")) {
         <input type="email" name="email" id="email" />
         <label for="password" class="mt-2">Password</label>
         <input type="password" name="password" id="password" />
-        <button type="submit" class="mr-auto mt-2">Login</button>
+        <button class="mr-auto mt-2" type="submit" id="submit-btn">
+          <div class="relative">
+            <div class="absolute">
+              <Spinner size={20} className="hidden ml-[15px] mt-[2px]" />
+            </div>
+          </div>
+          <span id="login"> Sign in</span>
+        </button>
       </form>
     </div>
   </div>
@@ -51,21 +59,31 @@ if (Astro.cookies.has("session")) {
     if (!email || !password) {
       return;
     }
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    const idToken = await userCredential.user.getIdToken();
-    const response = await fetch("/api/auth/signin-api", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    });
+    document.querySelector("#login")?.classList.add("invisible");
+    document.querySelector("#submit-btn")?.setAttribute("disabled", "true");
+    document.querySelector("#spinner")?.classList.remove("hidden");
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const idToken = await userCredential.user.getIdToken();
+      const response = await fetch("/api/auth/signin-api", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
 
-    if (response.redirected) {
-      window.location.assign(response.url);
+      if (response.redirected) {
+        window.location.assign(response.url);
+      }
+    } catch (e) {
+      console.log(e);
+      document.querySelector("#login")?.classList.remove("invisible");
+      document.querySelector("#submit-btn")?.removeAttribute("disabled");
+      document.querySelector("#spinner")?.classList.add("hidden");
     }
   });
 </script>
