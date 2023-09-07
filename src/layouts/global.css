@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
     font-family: "Inter Variable", sans-serif;
 }
@@ -12,4 +16,12 @@ label {
 
 input {
     @apply border border-gray-300 rounded-md shadow-sm mb-2;
+}
+
+button, [type="submit"] {
+    @apply rounded-md shadow-sm bg-black text-white px-3 py-[1px] hover:bg-gray-900;
+}
+
+a {
+    @apply underline underline-offset-4;
 }
