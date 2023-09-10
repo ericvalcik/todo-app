@@ -27,23 +27,20 @@ const { title, page } = Astro.props;
   <body class="min-h-screen flex flex-col">
     <nav class="w-full h-12 bg-stone-100">
       <div class="max-w-4xl h-full mx-auto flex justify-between items-center">
-        <div class="font-bold tracking-tighter">The Todo App</div>
+        <a href="/" class="font-bold tracking-tighter no-underline"
+          >The Todo App</a
+        >
         <div class="flex gap-4">
           <a
-            href="/"
-            class={(page === "home" ? "font-bold " : "") + "no-underline"}
-            >Home</a
+            href="/add"
+            class={(page === "add" ? "font-bold " : "") + "no-underline"}>Add</a
           >
           <a
-            href="/fetch"
-            class={(page === "fetch" ? "font-bold " : "") + "no-underline"}
-            >Fetch</a
+            href="/projects"
+            class={(page === "projects" ? "font-bold " : "") + "no-underline"}
+            >Projects</a
           >
-          <a
-            href="/api/auth/signout"
-            class={(page === "sign-out" ? "font-bold " : "") + "no-underline"}
-            >Sign out</a
-          >
+          <a href="/api/auth/signout" class="no-underline">Sign out</a>
         </div>
       </div>
     </nav>
