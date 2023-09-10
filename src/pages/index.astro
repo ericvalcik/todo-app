@@ -20,7 +20,7 @@ if (!user) {
 
 import { todos, projects } from "../db/schema";
 import { drizzle } from "drizzle-orm/libsql";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { createClient } from "@libsql/client";
 import Layout from "../layouts/Layout.astro";
 
@@ -34,7 +34,7 @@ const result = await db
   .select()
   .from(todos)
   .innerJoin(projects, eq(todos.projectId, projects.id))
-  .where(eq(todos.doToday, true));
+  .where(and(eq(todos.doToday, true), eq(todos.completed, false)));
 const currentTime = new Date().toLocaleString();
 const options = {
   weekday: "long",

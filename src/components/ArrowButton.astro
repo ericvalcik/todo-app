@@ -5,6 +5,9 @@ import RightArrow from "./icons/RightArrow.astro";
 <button
   type="button"
   class="flex gap-1 pl-3 pr-1 rounded-full border-2 border-solid border-black text-black font-semibold hover:text-gray-600 hover:border-gray-600 hover:bg-white"
+  hx-get="/api/finish-todo"
+  hx-target="closest .todo"
+  hx-swap="outerHTML"
 >
   Finish task
   <RightArrow />
