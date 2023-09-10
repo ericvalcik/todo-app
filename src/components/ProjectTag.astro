@@ -1,0 +1,22 @@
+---
+interface Props {
+  name: string;
+  color: string;
+}
+
+const { name, color } = Astro.props;
+---
+
+<a href="/projects" class="no-underline">
+  <div
+    style={`color: ${color}; border-color: ${color}`}
+    class="px-2 border-2 border-solid rounded-full flex gap-1 items-center"
+  >
+    <div
+      style={`background-color: ${color}`}
+      class="w-[7px] h-[7px] rounded-full"
+    >
+    </div>
+    <div class="font-bold text-sm">{name}</div>
+  </div>
+</a>

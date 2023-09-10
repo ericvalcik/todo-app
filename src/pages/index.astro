@@ -2,6 +2,7 @@
 import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from "../layouts/Layout.astro";
+import Todo from "../components/Todo.astro";
 
 const auth = getAuth(app);
 
@@ -17,8 +18,9 @@ if (!user) {
   return Astro.redirect("/signin");
 }
 
-import { Todo, todos } from "../db/schema";
+import { todos, projects } from "../db/schema";
 import { drizzle } from "drizzle-orm/libsql";
+import { eq } from "drizzle-orm";
 import { createClient } from "@libsql/client";
 import Layout from "../layouts/Layout.astro";
 
@@ -28,22 +30,36 @@ const client = createClient({
 });
 const db = drizzle(client);
 
-const result: Todo[] = await db.select().from(todos).all();
+const result = await db
+  .select()
+  .from(todos)
+  .innerJoin(projects, eq(todos.projectId, projects.id))
+  .where(eq(todos.doToday, true));
 const currentTime = new Date().toLocaleString();
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 ---
 
 <Layout title="Home" page="home">
-  <div class="flex flex-col gap-4 py-8">
+  <h1 class="text-4xl font-bold pt-16 mb-2">
+    Today is {new Date().toLocaleDateString(undefined, options)}
+  </h1>
+  <div>so what will you get done today?</div>
+  <div class="flex flex-col gap-4 py-8 pt-10">
     {
       result.map((todo) => (
-        <div class="flex gap-4 rounded-lg border border-solid border-black p-4">
-          <div>{todo.id}</div>
-          <div>{todo.description}</div>
-        </div>
+        <Todo
+          todo={{
+            description: todo.todos.description,
+            project: todo.projects.name,
+            projectColor: todo.projects.color,
+          }}
+        />
       ))
     }
-  </div>
-  <div>
-    current time: {currentTime}
   </div>
 </Layout>

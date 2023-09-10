@@ -7,10 +7,10 @@ settings:
 dependencies:
   '@astrojs/tailwind':
     specifier: ^5.0.0
-    version: 5.0.0(astro@3.0.10)(tailwindcss@3.3.3)
+    version: 5.0.0(astro@3.0.12)(tailwindcss@3.3.3)
   '@astrojs/vercel':
     specifier: ^4.0.3
-    version: 4.0.3(astro@3.0.10)
+    version: 4.0.3(astro@3.0.12)
   '@fontsource-variable/inter':
     specifier: ^5.0.8
     version: 5.0.8
@@ -18,11 +18,11 @@ dependencies:
     specifier: ^0.3.2
     version: 0.3.2
   astro:
-    specifier: ^3.0.10
-    version: 3.0.10
+    specifier: ^3.0.12
+    version: 3.0.12
   drizzle-orm:
-    specifier: ^0.28.5
-    version: 0.28.5(@libsql/client@0.3.2)
+    specifier: ^0.28.6
+    version: 0.28.6(@libsql/client@0.3.2)
   firebase:
     specifier: ^10.3.1
     version: 10.3.1
@@ -66,21 +66,21 @@ packages:
     resolution: {integrity: sha512-o/ObKgtMzl8SlpIdzaxFnt7SATKPxu4oIP/1NL+HDJRzxfJcAkOTAb/ZKMRyULbz4q+1t2/DAebs2Z1QairkZw==}
     dev: true
 
-  /@astrojs/compiler@2.0.1:
-    resolution: {integrity: sha512-DfBR7Cf+tOgQ4n7TIgTtU5x5SEA/08DNshpEPcT+91A0KbBlmUOYMBM/O6qAaHkmVo1KIoXQYhAmfdTT1zx9PQ==}
+  /@astrojs/compiler@2.1.0:
+    resolution: {integrity: sha512-Mp+qrNhly+27bL/Zq8lGeUY+YrdoU0eDfIlAeGIPrzt0PnI/jGpvPUdCaugv4zbCrDkOUScFfcbeEiYumrdJnw==}
     dev: false
 
   /@astrojs/internal-helpers@0.2.0:
     resolution: {integrity: sha512-NQ4ppp1CM0HNkKbJNM4saVSfmUYzGlRalF6wx7F6T/MYHYSWGuojY89/oFTy4t8VlOGUCUijlsVNNeziWaUo5g==}
     dev: false
 
-  /@astrojs/markdown-remark@3.0.0(astro@3.0.10):
-    resolution: {integrity: sha512-s8I49Je4++ImgYAgwL32HgN8m6we2qz3RtBpN4AjObMODPwDylmzUHZksD8Toy31q/P59ED3MuwphqOGm9l03w==}
+  /@astrojs/markdown-remark@3.1.0(astro@3.0.12):
+    resolution: {integrity: sha512-5UwamK0iFxN0n1Nw44vUk8AkQr4psKS63hM3D1/4bhhjs4ZFRyrYmg5NjScaMEXZcrd2KgGPsd+PEwNs4mlBOw==}
     peerDependencies:
-      astro: ^3.0.0
+      astro: ^3.0.11
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.0.10
+      astro: 3.0.12
       github-slugger: 2.0.0
       import-meta-resolve: 3.0.0
       rehype-raw: 6.1.1
@@ -104,13 +104,13 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/tailwind@5.0.0(astro@3.0.10)(tailwindcss@3.3.3):
+  /@astrojs/tailwind@5.0.0(astro@3.0.12)(tailwindcss@3.3.3):
     resolution: {integrity: sha512-bMZZNNm/SW+ijUKMQDhdiuNWDdR3CubEKUHb2Ran4Arx1ikWn/kKIkFDXUV+MUnsLa7s19x9VMRlARRyKbqMkQ==}
     peerDependencies:
       astro: ^3.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.0.10
+      astro: 3.0.12
       autoprefixer: 10.4.15(postcss@8.4.29)
       postcss: 8.4.29
       postcss-load-config: 4.0.1(postcss@8.4.29)
@@ -135,7 +135,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vercel@4.0.3(astro@3.0.10):
+  /@astrojs/vercel@4.0.3(astro@3.0.12):
     resolution: {integrity: sha512-sK+y3RZ0g277fhnC/zZ8QS7OMZQx2y43fHYpgW5ERhrw8+RLOBSEi9AmUlCQYymHvqpJ7RYwUwEym6inAGhlEg==}
     peerDependencies:
       astro: ^3.0.6
@@ -143,7 +143,7 @@ packages:
       '@astrojs/internal-helpers': 0.2.0
       '@vercel/analytics': 1.0.2
       '@vercel/nft': 0.23.1
-      astro: 3.0.10
+      astro: 3.0.12
       esbuild: 0.19.2
       fast-glob: 3.3.1
       set-cookie-parser: 2.6.0
@@ -1913,14 +1913,14 @@ packages:
     dev: false
     optional: true
 
-  /astro@3.0.10:
-    resolution: {integrity: sha512-LxLlFksTUn3B3Xi3KBirRBg1QI8t2lvOijfODor1OSpAnlEZUzToyLxbdzR2dBVLF5reAoi7LJNKsQouPnMXlg==}
+  /astro@3.0.12:
+    resolution: {integrity: sha512-nDLI9OGEjYIX90a1Md1orqyurPxqXTWTy7Sm3ZsWl5dpzSjcUXo3VB/GTvNjAMS9sE40BOxhay7/hnnQuI8p7A==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
-      '@astrojs/compiler': 2.0.1
+      '@astrojs/compiler': 2.1.0
       '@astrojs/internal-helpers': 0.2.0
-      '@astrojs/markdown-remark': 3.0.0(astro@3.0.10)
+      '@astrojs/markdown-remark': 3.1.0(astro@3.0.12)
       '@astrojs/telemetry': 3.0.1
       '@babel/core': 7.22.15
       '@babel/generator': 7.22.15
@@ -2517,8 +2517,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.28.5(@libsql/client@0.3.2):
-    resolution: {integrity: sha512-6r6Iw4c38NAmW6TiKH3TUpGUQ1YdlEoLJOQptn8XPx3Z63+vFNKfAiANqrIiYZiMjKR9+NYAL219nFrmo1duXA==}
+  /drizzle-orm@0.28.6(@libsql/client@0.3.2):
+    resolution: {integrity: sha512-yBe+F9htrlYER7uXgDJUQsTHFoIrI5yMm5A0bg0GiZ/kY5jNXTWoEy4KQtg35cE27sw1VbgzoMWHAgCckUUUww==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -6110,6 +6110,7 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    requiresBuild: true
     dev: false
 
   /yocto-queue@1.0.0:
