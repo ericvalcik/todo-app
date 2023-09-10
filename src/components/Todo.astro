@@ -6,6 +6,7 @@ interface Props {
     description: string;
     project: string;
     projectColor: string;
+    id: string;
   };
 }
 
@@ -20,6 +21,6 @@ const { todo } = Astro.props;
     <div class="font-semibold text-xl">{todo.description}</div>
   </div>
   <div>
-    <ArrowButton />
+    <ArrowButton id={todo.id} />
   </div>
 </div>

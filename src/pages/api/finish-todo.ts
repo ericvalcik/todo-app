@@ -6,7 +6,7 @@ import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { eq } from "drizzle-orm";
 
-export const GET: APIRoute = async ({ request, cookies, redirect }) => {
+export const GET: APIRoute = async ({ request, cookies, redirect, url }) => {
   const auth = getAuth(app);
 
   /* Check current session */
@@ -27,10 +27,9 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   });
   const db = drizzle(client);
 
-  // const formData = await request.formData();
-  // const id = +(formData.get("id") || "0");
+  const id = +(url.searchParams.get("id") || "");
 
-  await db.update(todos).set({ completed: true }).where(eq(todos.id, 6));
+  await db.update(todos).set({ completed: true }).where(eq(todos.id, id));
 
   return new Response("", { status: 200 });
 };
