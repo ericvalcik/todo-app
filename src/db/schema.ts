@@ -6,12 +6,18 @@ export const users = sqliteTable("users", {
   phone: text("phone"),
 });
 
+export type User = typeof users.$inferSelect; // return type when queried
+export type InsertUser = typeof users.$inferInsert; // insert type
+
 export const projects = sqliteTable("projects", {
   id: integer("id").primaryKey(),
   name: text("name").notNull(),
   color: text("color").notNull().default("#000000"),
   archived: integer("archived", { mode: "boolean" }).notNull().default(false),
 });
+
+export type Project = typeof projects.$inferSelect; // return type when queried
+export type InsertProject = typeof projects.$inferInsert;
 
 export const todos = sqliteTable("todos", {
   id: integer("id").primaryKey(),
@@ -22,5 +28,5 @@ export const todos = sqliteTable("todos", {
   finishedAt: integer("finished_at", { mode: "timestamp" }),
 });
 
-export type User = typeof users.$inferSelect; // return type when queried
-export type InsertUser = typeof users.$inferInsert; // insert type
+export type Todo = typeof todos.$inferSelect;
+export type InsertTodo = typeof todos.$inferInsert;
