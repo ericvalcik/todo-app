@@ -1,0 +1,12 @@
+---
+import Todo from "../../components/Todo.astro";
+const url = Astro.url;
+const todo = {
+  id: url.searchParams.get("id"),
+  description: url.searchParams.get("description"),
+  project: url.searchParams.get("project"),
+  projectColor: url.searchParams.get("projectColor"),
+};
+---
+
+<Todo todo={todo} />
