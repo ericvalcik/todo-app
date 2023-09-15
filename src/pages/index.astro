@@ -33,7 +33,7 @@ const db = drizzle(client);
 const result = await db
   .select()
   .from(todos)
-  .innerJoin(projects, eq(todos.projectId, projects.id))
+  .fullJoin(projects, eq(todos.projectId, projects.id))
   .where(and(eq(todos.doToday, true), eq(todos.completed, false)));
 const currentTime = new Date().toLocaleString();
 const options: Intl.DateTimeFormatOptions = {
@@ -55,8 +55,8 @@ const options: Intl.DateTimeFormatOptions = {
         <Todo
           todo={{
             description: todo.todos.description,
-            project: todo.projects.name,
-            projectColor: todo.projects.color,
+            project: todo.projects?.name,
+            projectColor: todo.projects?.color,
             id: todo.todos.id,
           }}
         />
