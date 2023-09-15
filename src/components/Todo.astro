@@ -1,6 +1,6 @@
 ---
 import ProjectTag from "./ProjectTag.astro";
-import ArrowButton from "./ArrowButton.astro";
+import FinishTaskButton from "./FinishTaskButton.astro";
 interface Props {
   todo: {
     description: string;
@@ -21,6 +21,6 @@ const { todo } = Astro.props;
     <div class="font-semibold text-xl">{todo.description}</div>
   </div>
   <div>
-    <ArrowButton id={todo.id} />
+    <FinishTaskButton id={todo.id} />
   </div>
 </div>
