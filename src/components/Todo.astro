@@ -17,7 +17,11 @@ const { todo } = Astro.props;
   class="w-[1024px] py-5 px-6 border border-gray-100 rounded-xl flex items-end shadow-sm justify-between todo"
 >
   <div class="flex flex-col items-start gap-2">
-    <ProjectTag name={todo.project} color={todo.projectColor} />
+    {
+      todo.project ? (
+        <ProjectTag name={todo.project} color={todo.projectColor} />
+      ) : null
+    }
     <div class="font-semibold text-xl">{todo.description}</div>
   </div>
   <div>
