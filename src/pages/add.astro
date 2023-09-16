@@ -63,7 +63,7 @@ const result = await db.select().from(projects).all();
             <div class="absolute">
               <Spinner
                 size={20}
-                className="htmx-indicator hidden ml-[25px] mt-[2px]"
+                className="htmx-indicator hidden ml-[37px] mt-[2px]"
               />
             </div>
           </div>
@@ -77,6 +77,6 @@ const result = await db.select().from(projects).all();
   document.addEventListener("htmx:beforeRequest", (event) => {
     document.getElementById("spinner").classList.remove("hidden");
     document.getElementById("submit").classList.add("invisible");
-    document.getElementById("submit-btn").attributes["disabled"] = true;
+    document.getElementById("submit-btn").setAttribute("disabled", true);
   });
 </script>
