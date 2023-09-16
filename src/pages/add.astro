@@ -36,7 +36,10 @@ const result = await db.select().from(projects).all();
   <div class="grow flex items-center">
     <div class="mx-auto w-[340px] pb-40">
       <h1 class="text-4xl font-bold pt-16 mb-2">Create a new todo</h1>
-      <form hx-post="/htmx/add" class="flex flex-col py-8 pt-16">
+      <form
+        hx-post="/htmx/add-todo-htmx-endpoint"
+        class="flex flex-col py-8 pt-16"
+      >
         <label for="description" class="font-semibold mb-1.5">
           Description</label
         >
