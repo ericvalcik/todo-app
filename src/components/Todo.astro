@@ -1,6 +1,8 @@
 ---
 import ProjectTag from "./ProjectTag.astro";
 import FinishTaskButton from "./FinishTaskButton.astro";
+import ArchiveButton from "./ArchiveButton.astro";
+
 interface Props {
   todo: {
     description: string;
@@ -24,7 +26,8 @@ const { todo } = Astro.props;
     }
     <div class="font-semibold text-xl">{todo.description}</div>
   </div>
-  <div>
+  <div class="flex gap-2">
     <FinishTaskButton id={todo.id} />
+    <ArchiveButton id={todo.id} />
   </div>
 </div>

@@ -1,0 +1,60 @@
+---
+import { app } from "../../firebase/server";
+import { getAuth } from "firebase-admin/auth";
+const auth = getAuth(app);
+
+const cookies = Astro.cookies;
+
+/* Check current session */
+// TODO doesn't work - does not redirect the user actually - figure that out
+if (!cookies.has("session")) {
+  return; // Astro.redirect("/signin");
+}
+const sessionCookie = cookies.get("session")?.value ?? "";
+const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+const user = await auth.getUser(decodedCookie.uid);
+
+// TODO same here
+if (!user) {
+  return; // Astro.redirect("/signin");
+}
+
+import { createClient } from "@libsql/client";
+import { drizzle } from "drizzle-orm/libsql";
+import Todo from "../../components/Todo.astro";
+import { todos, projects } from "../../db/schema";
+import { eq } from "drizzle-orm";
+import { app } from "../../firebase/server";
+
+const url = Astro.url;
+const id = url.searchParams.get("id");
+
+const client = createClient({
+  url: import.meta.env.DATABASE_URL,
+  authToken: import.meta.env.DATABASE_AUTH_TOKEN,
+});
+const db = drizzle(client);
+
+const todosResult = await db.select().from(todos).where(eq(todos.id, id));
+const todo = todosResult[0];
+const project = todo.projectId
+  ? await db.select().from(projects).where(eq(projects.id, todo.projectId))
+  : null;
+
+const todoObj = {
+  description: todo.description + "balls",
+  project: project ? project[0].name : null,
+  projectColor: project ? project[0].color : null,
+  id: id,
+};
+
+let errored: boolean = false;
+try {
+  await db.update(todos).set({ doToday: false }).where(eq(todos.id, id));
+} catch (e) {
+  console.log(e);
+  errored = true;
+}
+---
+
+{errored ? <Todo todo={todoObj} /> : null}
