@@ -6,7 +6,7 @@ const auth = getAuth(app);
 const cookies = Astro.cookies;
 
 /* Check current session */
-// TODO doesnt work - does not redirect the user actually - figure that out
+// TODO doesn't work - does not redirect the user actually - figure that out
 if (!cookies.has("session")) {
   return Astro.redirect("/signin");
 }
