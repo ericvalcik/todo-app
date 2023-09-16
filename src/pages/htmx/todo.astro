@@ -50,8 +50,12 @@ const todoObj = {
 
 let errored: boolean = false;
 try {
-  await db.update(todos).set({ completed: true }).where(eq(todos.id, id));
+  await db
+    .update(todos)
+    .set({ completed: true, finishedAt: new Date() })
+    .where(eq(todos.id, id));
 } catch (e) {
+  console.log(e);
   errored = true;
 }
 ---
