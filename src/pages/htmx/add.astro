@@ -1,5 +1,49 @@
 ---
-await new Promise((resolve) => setTimeout(resolve, 3000));
+import { app } from "../../firebase/server";
+import { getAuth } from "firebase-admin/auth";
+const auth = getAuth(app);
+
+const cookies = Astro.cookies;
+
+/* Check current session */
+// TODO doesn't work - does not redirect the user actually - figure that out
+if (!cookies.has("session")) {
+  return; // Astro.redirect("/signin");
+}
+const sessionCookie = cookies.get("session")?.value ?? "";
+const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+const user = await auth.getUser(decodedCookie.uid);
+
+// TODO same here
+if (!user) {
+  return; // Astro.redirect("/signin");
+}
+const request = Astro.request;
+const data = await request.formData();
+
+const description = data.get("description");
+const project = data.get("project") === "none" ? null : data.get("project");
+
+import { createClient } from "@libsql/client";
+import { drizzle } from "drizzle-orm/libsql";
+import { todos, InsertTodo } from "../../db/schema";
+import { app } from "../../firebase/server";
+
+const client = createClient({
+  url: import.meta.env.DATABASE_URL,
+  authToken: import.meta.env.DATABASE_AUTH_TOKEN,
+});
+const db = drizzle(client);
+
+await db.insert(todos).values({
+  description,
+  projectId: project,
+  doToday: true,
+});
 ---
 
-{null}
+<div class="flex flex-col gap-2">
+  <h1 class="text-2xl">Todo added.</h1>
+  <div>Wanna add a new one?</div>
+  <a href="/add">Add new todo</a>
+</div>

@@ -8,14 +8,15 @@ const cookies = Astro.cookies;
 /* Check current session */
 // TODO doesn't work - does not redirect the user actually - figure that out
 if (!cookies.has("session")) {
-  return Astro.redirect("/signin");
+  return; // Astro.redirect("/signin");
 }
 const sessionCookie = cookies.get("session")?.value ?? "";
 const decodedCookie = await auth.verifySessionCookie(sessionCookie);
 const user = await auth.getUser(decodedCookie.uid);
 
+// TODO same here
 if (!user) {
-  return Astro.redirect("/signin");
+  return; // Astro.redirect("/signin");
 }
 
 import { createClient } from "@libsql/client";
