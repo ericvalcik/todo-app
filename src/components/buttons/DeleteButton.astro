@@ -1,0 +1,20 @@
+---
+import TrashIcon from "../icons/Trash.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<button
+  type="button"
+  class="flex gap-1 px-2 rounded-full border-2 border-solid items-center border-red-500 text-red-500 font-semibold hover:text-red-700 hover:border-red-700 hover:bg-white"
+  hx-vals={`{"id": "${id}"}`}
+  hx-get="/htmx/delete-todo"
+  hx-target="closest .todo"
+  hx-swap="outerHTML"
+>
+  <TrashIcon />
+</button>

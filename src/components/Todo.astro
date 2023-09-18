@@ -2,6 +2,8 @@
 import ProjectTag from "./ProjectTag.astro";
 import FinishTaskButton from "./buttons/FinishTaskButton.astro";
 import ArchiveButton from "./buttons/ArchiveButton.astro";
+import DeleteButton from "./buttons/DeleteButton.astro";
+import AddToday from "./buttons/AddToday.astro";
 
 interface Props {
   todo: {
@@ -10,9 +12,10 @@ interface Props {
     projectColor: string;
     id: string;
   };
+  isProjects: boolean;
 }
 
-const { todo } = Astro.props;
+const { todo, isProjects } = Astro.props;
 ---
 
 <div
@@ -27,7 +30,18 @@ const { todo } = Astro.props;
     <div class="font-semibold text-xl">{todo.description}</div>
   </div>
   <div class="flex gap-2">
-    <FinishTaskButton id={todo.id} />
-    <ArchiveButton id={todo.id} />
+    {
+      isProjects ? (
+        <>
+          <FinishTaskButton id={todo.id} />
+          <ArchiveButton id={todo.id} />
+        </>
+      ) : (
+        <>
+          <AddToday id={todo.id} />
+          <DeleteButton id={todo.id} />
+        </>
+      )
+    }
   </div>
 </div>

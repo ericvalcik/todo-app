@@ -1,0 +1,21 @@
+---
+import CalendarIcon from "../icons/Calendar.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<button
+  type="button"
+  class="flex gap-1 pl-3 pr-2 rounded-full items-center border-2 border-solid border-black text-black font-semibold hover:text-gray-600 hover:border-gray-600 hover:bg-white"
+  hx-vals={`{"id": "${id}"}`}
+  hx-get="/htmx/add-today-todo"
+  hx-target="closest .todo"
+  hx-swap="outerHTML"
+>
+  Add to Today
+  <CalendarIcon />
+</button>
