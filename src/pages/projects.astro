@@ -1,7 +1,8 @@
 ---
-import { app } from "../firebase/server";
-import { getAuth } from "firebase-admin/auth";
+import {app} from "../firebase/server";
+import {getAuth} from "firebase-admin/auth";
 import Layout from "../layouts/Layout.astro";
+import Todo from "../components/Todo.astro";
 
 const auth = getAuth(app);
 
@@ -16,6 +17,52 @@ const user = await auth.getUser(decodedCookie.uid);
 if (!user) {
   return Astro.redirect("/signin");
 }
+
+import {todos, projects, Project, Todo as TodoDbType} from "../db/schema";
+import {drizzle} from "drizzle-orm/libsql";
+import {eq, and} from "drizzle-orm";
+import {createClient} from "@libsql/client";
+import Layout from "../layouts/Layout.astro";
+
+const client = createClient({
+  url: import.meta.env.DATABASE_URL,
+  authToken: import.meta.env.DATABASE_AUTH_TOKEN,
+});
+const db = drizzle(client);
+
+const projectsResults: Project[] = [
+  {id: null, name: "Without project", color: "black", archived: false},
+  ...(await db.select().from(projects).all()),
+];
+
+const allTodos: TodoDbType[] = await db
+  .select()
+  .from(todos)
+  .where(eq(todos.doToday, false))
+  .all();
 ---
 
-<Layout title="Projects" page="projects">Projects</Layout>
+<Layout title="Projects" page="projects">
+  <h1 class="text-4xl font-bold pt-16 mb-2">Projects</h1>
+  <div>You can currently only create projects in the database.</div>
+  <div class="pt-8 pb-32">
+    {projectsResults.map((project) =>
+        <>
+          <div class="flex pb-4 pt-6">
+            <div class="mr-auto flex gap-2 border-[3px] border-solid rounded-full px-2 items-center"
+                 style=`border-color: ${project.color}; color: ${project.color}`>
+              <div class="w-[8px] h-[8px] rounded-full" style=`background-color: ${project.color}`></div>
+              <div class="font-semibold tracking-tighter text-xl">
+                {project.name}
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            {allTodos.filter((todo) => todo.projectId === project.id).map((todo) =>
+                <Todo todo={todo}/>
+            )}
+          </div>
+        </>
+    )}
+  </div>
+</Layout>
