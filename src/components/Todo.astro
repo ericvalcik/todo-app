@@ -19,19 +19,21 @@ const { todo, isProjects } = Astro.props;
 ---
 
 <div
-  class="w-[1024px] py-5 px-6 border border-gray-100 rounded-xl flex items-end shadow-sm justify-between todo"
+  class="w-full py-5 px-6 border border-gray-100 rounded-xl flex flex-col gap-4 sm:flex-row items-end shadow-sm justify-between todo"
 >
-  <div class="flex flex-col items-start gap-2">
+  <div class="flex flex-col items-start gap-2 grow self-start">
     {
       todo.project ? (
         <ProjectTag name={todo.project} color={todo.projectColor} />
       ) : null
     }
-    <div class="font-semibold text-xl">{todo.description}</div>
+    <div class="font-semibold text-xl">
+      {todo.description}
+    </div>
   </div>
-  <div class="flex gap-2">
+  <div class="flex gap-2 flex-none items-end self-start sm:self-end">
     {
-      isProjects ? (
+      !isProjects ? (
         <>
           <FinishTaskButton id={todo.id} />
           <ArchiveButton id={todo.id} />

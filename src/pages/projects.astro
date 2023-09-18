@@ -59,7 +59,7 @@ const allTodos: TodoDbType[] = await db
           </div>
           <div class="flex flex-col gap-2">
             {allTodos.filter((todo) => todo.projectId === project.id).map((todo) =>
-                <Todo todo={todo}/>
+                <Todo todo={todo} isProjects={true}/>
             )}
           </div>
         </>
