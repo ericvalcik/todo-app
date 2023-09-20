@@ -35,14 +35,17 @@ const { title, page } = Astro.props;
         <div class="flex gap-4">
           <a
             href="/add"
-            class={(page === "add" ? "font-bold " : "") + "no-underline"}>Add</a
+            class={(page === "add" ? "font-bold " : "") +
+              "no-underline tracking-tighter"}>Add</a
           >
           <a
             href="/projects"
-            class={(page === "projects" ? "font-bold " : "") + "no-underline"}
-            >Projects</a
+            class={(page === "projects" ? "font-bold " : "") +
+              "no-underline tracking-tighter"}>Projects</a
           >
-          <a href="/api/auth/signout" class="no-underline">Sign out</a>
+          <a href="/api/auth/signout" class="no-underline tracking-tighter"
+            >Sign out</a
+          >
         </div>
       </div>
     </nav>
