@@ -7,10 +7,14 @@ import Spinner from "../components/Spinner.astro";
 /* Check if the user is authenticated */
 const auth = getAuth(app);
 if (Astro.cookies.has("session")) {
-  const sessionCookie = Astro.cookies.get("session").value;
-  const decodedCookie = await auth.verifySessionCookie(sessionCookie);
-  if (decodedCookie) {
-    return Astro.redirect("/");
+  try {
+    const sessionCookie = Astro.cookies.get("session").value;
+    const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+    if (decodedCookie) {
+      return Astro.redirect("/");
+    }
+  } catch (e) {
+    // pass
   }
 }
 ---
