@@ -4,6 +4,7 @@ import FinishTaskButton from "./buttons/FinishTaskButton.astro";
 import ArchiveButton from "./buttons/ArchiveButton.astro";
 import DeleteButton from "./buttons/DeleteButton.astro";
 import AddToday from "./buttons/AddToday.astro";
+import showdown from "showdown";
 
 interface Props {
   todo: {
@@ -16,6 +17,12 @@ interface Props {
 }
 
 const { todo, isProjects } = Astro.props;
+
+const converter = new showdown.Converter({
+  openLinksInNewWindow: true,
+  simplifiedAutoLink: true,
+});
+const html = converter.makeHtml(todo.description);
 ---
 
 <div
@@ -27,9 +34,7 @@ const { todo, isProjects } = Astro.props;
         <ProjectTag name={todo.project} color={todo.projectColor} />
       ) : null
     }
-    <div class="font-semibold text-xl">
-      {todo.description}
-    </div>
+    <div class="font-semibold text-xl" set:html={html} />
   </div>
   <div class="flex gap-2 flex-none items-end self-start sm:self-end">
     {
